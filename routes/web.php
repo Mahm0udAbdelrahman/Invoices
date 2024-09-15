@@ -6,6 +6,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\InvoiceController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SectionController;
+use App\Http\Controllers\Dashboard\AttachmentController;
+use App\Http\Controllers\Dashboard\PaidInvoiceController;
+use App\Http\Controllers\Dashboard\UnPaidInvoiceController;
+use App\Http\Controllers\Dashboard\InvoiceDetailsController;
+use App\Http\Controllers\Dashboard\ArchivingInvoiceController;
+use App\Http\Controllers\Dashboard\PartiallyInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +31,34 @@ Route::get('/', function () {
 
 
 
-Route::resource('invoices',InvoiceController::class);
-Route::resource('sections',SectionController::class);
-Route::resource('products',ProductController::class);
+
+
+Route::resources([
+    'invoices' => InvoiceController::class,
+    'invoice_details' => InvoiceDetailsController::class,
+    'sections' => SectionController::class,
+    'products' => ProductController::class,
+    'attachments' => AttachmentController::class,
+    'paid_invoices' => PaidInvoiceController::class,
+    'unpaid_invoices' => UnPaidInvoiceController::class,
+    'partially_invoices' => PartiallyInvoiceController::class,
+    'archiving_invoices' => ArchivingInvoiceController::class,
+
+
+
+]);
+Route::post('restoreDelete/{id}',[InvoiceController::class,'restoreDelete'])->name('invoices.restore');
+Route::delete('forceDelete/{id}',[InvoiceController::class,'forceDelete'])->name('invoices.force');
+Route::post('statusUpdate/{id}',[InvoiceController::class,'statusUpdate'])->name('invoices.statusUpdate');
+Route::get('print_invoice/{id}',[InvoiceController::class,'print'])->name('invoices.print');
+Route::get('Mark_All_Read',[InvoiceController::class,'MarkAllRead'])->name('invoices.Mark_All_Read');
+
+
+Route::get('section/{product_id}',[InvoiceController::class, 'getProduct']);
+Route::get('getFile/{invoice_number}/{file_name}',[InvoiceDetailsController::class, 'getFile'])->name('getFile');
+Route::get('openFile/{invoice_number}/{file_name}',[InvoiceDetailsController::class, 'openFile'])->name('openFile');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

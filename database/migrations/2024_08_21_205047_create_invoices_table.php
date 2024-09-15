@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_number');
+            $table->string('invoice_number', 50);
             $table->date('invoice_Date')->nullable();
             $table->date('Due_date')->nullable();
             $table->string('product', 50);
-            $table->string('section');
+            $table->foreignId('section_id')->constrained('sections','id')->cascadeOnDelete();
+            $table->decimal('Amount_collection',8,2)->nullable();
+            $table->decimal('Amount_Commission',8,2);
             $table->decimal('Discount',8,2);
-            $table->string('Rate_VAT', 999);
             $table->decimal('Value_VAT',8,2);
+            $table->string('Rate_VAT', 999);
             $table->decimal('Total',8,2);
-            $table->string('Status', 50);
-            $table->integer('Value_Status');
+            $table->enum('status',[1,2,3])->default(2);
             $table->text('note')->nullable();
-
-
-             $table->softDeletes();
+            $table->date('Payment_Date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

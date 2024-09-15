@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', ' قايمة الفواتير')
+@section('title', '   الارشفه')
 
 @section('css')
     <!-- Internal Data table css -->
@@ -15,8 +15,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قايمة
-                    الفواتير</span>
+                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الارشفه
+                     </span>
             </div>
         </div>
 
@@ -95,25 +95,18 @@
                                                         <a class="dropdown-item text-success" href="#" data-toggle="modal" data-target="#restoreModal">استرجاع</a>
 
                                                         <!-- حذف نهائي -->
-                                                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#forceDeleteModal"> حذف نهائي</a>
-                                                    @else
+                                                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#forceDeleteModal">  <i
+                                                            class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp; حذف نهائي
+                                                        الفاتورة</a>
+
+                                                     @else
                                                         <!-- تعديل الفاتورة -->
                                                         <a class="dropdown-item text-primary" href="{{ route('invoices.edit', $invoice->id) }}">تعديل</a>
                                                         <!-- تعديل   status الفاتورة -->
-                                                        <a class="dropdown-item text-info" href="{{ route('invoices.show', $invoice->id) }}"> <i
-                                                            class=" text-success fas
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                fa-money-bill"></i>&nbsp;&nbsp;تغير
-                                                        حالة
-                                                        الدفع</a>
+                                                        <a class="dropdown-item text-info" href="{{ route('invoices.show', $invoice->id) }}"> تعديل  حاله الدفع</a>
 
                                                         <!-- حذف موقت -->
-                                                        <a class="dropdown-item text-warning" href="#" data-toggle="modal" data-target="#softDeleteModal">
-                                                            <i
-                                                            class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الي
-                                                        الارشيف</a>
-
-                                                        <a class="dropdown-item text-secondary" href="{{ route('invoices.print' , $invoice->id) }} "><i
-                                                            class="text-success fas fa-print"></i>&nbsp;&nbsp;  طباعة الفاتوره</a>
+                                                        <a class="dropdown-item text-warning" href="#" data-toggle="modal" data-target="#softDeleteModal">حذف موقت</a>
                                                     @endif
                                                 </div>
                                             </div>

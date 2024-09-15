@@ -23,7 +23,7 @@ class SectionStoreRequest extends FormRequest
     {
         return [
            'section_name' => 'required|string|unique:sections,section_name',
-           'description' => 'required|string',
+           
         ];
     }
 }

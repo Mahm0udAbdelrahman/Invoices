@@ -44,6 +44,18 @@ return [
             'throw' => false,
         ],
 
+
+    // Other disk configurations...
+
+    'public_uploads' => [
+        'driver' => 'local',
+        'root' => public_path('invoice'), // Or the desired path
+        'url' => env('APP_URL') . '/invoice',
+        'visibility' => 'public',
+    ],
+
+
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
