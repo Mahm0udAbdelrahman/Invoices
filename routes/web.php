@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\UserController;
+ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\InvoiceController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SectionController;
@@ -58,7 +59,13 @@ Route::get('section/{product_id}',[InvoiceController::class, 'getProduct']);
 Route::get('getFile/{invoice_number}/{file_name}',[InvoiceDetailsController::class, 'getFile'])->name('getFile');
 Route::get('openFile/{invoice_number}/{file_name}',[InvoiceDetailsController::class, 'openFile'])->name('openFile');
 
+Route::group(['middleware' => ['auth']], function() {
 
+    Route::resource('roles',RoleController::class);
+
+    Route::resource('users',UserController::class);
+
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
